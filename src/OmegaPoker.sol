@@ -15,7 +15,7 @@
 //
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
-pragma solidity >=0.5.10;
+pragma solidity >=0.5.12;
 
 interface IlkReg {
     function list() external returns (bytes32[] memory);
@@ -39,8 +39,8 @@ contract OmegaPoker {
     bytes32[] public ilks;
     address[] public osms;
 
-    IlkReg    public immutable registry;
-    address   public immutable spot;
+    IlkReg    private registry;
+    address   private spot;
 
     constructor(address ilkRegAddress, address spotterAddress) public {
         registry = IlkReg(ilkRegAddress);
