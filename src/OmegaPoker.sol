@@ -15,7 +15,7 @@
 //
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
-pragma solidity ^0.6.12;
+pragma solidity >=0.5.10;
 
 interface IlkReg {
     function list() external returns (bytes32[] memory);
@@ -36,17 +36,15 @@ contract OmegaPoker {
     bytes4   constant osmselector  = 0x18178358;  // "poke()"
     bytes4   constant srcselector  = 0x2e7dc6af;  // "src()"
 
-    Chainlog constant cl = Chainlog(0xdA0Ab1e0017DEbCd72Be8599041a2aa3bA7e740F);
-
     bytes32[] public ilks;
     address[] public osms;
 
     IlkReg    public immutable registry;
     address   public immutable spot;
 
-    constructor() public {
-        registry = IlkReg(cl.getAddress("ILK_REGISTRY"));
-        spot     = cl.getAddress("MCD_SPOT");
+    constructor(address ilkRegAddress, address spotterAddress) public {
+        registry = IlkReg(ilkRegAddress);
+        spot     = spotterAddress;
     }
 
     function osmCount() external view returns (uint256) {
