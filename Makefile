@@ -1,4 +1,3 @@
-all    :; DAPP_BUILD_OPTIMIZE=1 DAPP_BUILD_OPTIMIZE_RUNS=1000 dapp --use solc:0.5.12 build
+build  :; dapp --use solc:0.5.12 build
 clean  :; dapp clean
-test   :; ./test.sh
-deploy :; make && dapp create MegaPoker
+test   :; dapp --use solc:0.5.12 test -v ${TEST_FLAGS}
